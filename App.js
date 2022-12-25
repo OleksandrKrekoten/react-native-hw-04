@@ -26,7 +26,7 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
-  const routing = useRoute(true);
+  const routing = useRoute(1);
   return (
     <TouchableWithoutFeedback
       onPress={() => {

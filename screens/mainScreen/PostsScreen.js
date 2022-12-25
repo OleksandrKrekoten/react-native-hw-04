@@ -1,17 +1,16 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { HomeScreen } from "../nestedScreens/Home";
+import { MapScreen } from "../nestedScreens/MapScreen";
+import { CommentsScreen } from "../nestedScreens/CommentsScreen";
 
+const NestedScreen = createStackNavigator();
 export const PostsScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text>PostsScreen</Text>
-    </View>
+    <NestedScreen.Navigator>
+      <NestedScreen.Screen name="Home" component={HomeScreen} />
+      <NestedScreen.Screen name="Map" component={MapScreen} />
+      <NestedScreen.Screen name="Comments" component={CommentsScreen} />
+    </NestedScreen.Navigator>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignSelf:"center"
-  },
-});

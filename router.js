@@ -7,6 +7,7 @@ import { CreatePostsScreen } from "./screens/mainScreen/CreatePostsScreen";
 import { PostsScreen } from "./screens/mainScreen/PostsScreen";
 import { ProfileScreen } from "./screens/mainScreen/ProfileScreen";
 import { AntDesign } from "@expo/vector-icons";
+
 const AuthStack = createNativeStackNavigator();
 const MainTab = createBottomTabNavigator();
 
@@ -28,32 +29,58 @@ export const useRoute = (isAuth) => {
     );
   }
   return (
-    <MainTab.Navigator tabBarOptions={{ showLabel: false }}>
+    <MainTab.Navigator
+      screenOptions={{
+        tabBarShowLabel: false,
+        tabBarStyle: [
+          {
+            position: "absolute",
+            bottom: 25,
+            left: 20,
+            right: 20,
+            elevation: 0,
+            backgroundColor: "#212121",
+            borderRadius: 15,
+          },
+          null,
+        ],
+      }}
+    >
       <MainTab.Screen
         options={{
-          headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
-            <AntDesign name="appstore-o" size={size} color={color} />
+            <AntDesign
+              name="appstore-o"
+              size={24}
+              color={focused ? "#fff" : "#808080"}
+            />
           ),
+           headerShown: false ,
         }}
         name="Posts"
         component={PostsScreen}
       />
       <MainTab.Screen
         options={{
-          headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
-            <AntDesign name="plus" size={size} color={color} />
+            <AntDesign
+              name="plus"
+              size={24}
+              color={focused ? "#fff" : "#808080"}
+            />
           ),
         }}
-        name="CreatePosts"
+        name="Create Posts"
         component={CreatePostsScreen}
       />
       <MainTab.Screen
         options={{
-          headerShown: false,
-          tabBarIcon: ({ focused, color, size }) => (
-            <AntDesign name="user" size={size} color={color} />
+          tabBarIcon: ({ focused }) => (
+            <AntDesign
+              name="user"
+              size={24}
+              color={focused ? "#fff" : "#808080"}
+            />
           ),
         }}
         name="Profile"

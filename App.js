@@ -1,16 +1,14 @@
-import { useCallback } from "react";
-
-import { NavigationContainer } from "@react-navigation/native";
 import * as SplashScreen from "expo-splash-screen";
-import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  View,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from "react-native";
+import { useCallback } from "react";
 import { useFonts } from "expo-font";
-import { useRoute } from "./router";
+
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
+
+import { Main } from "./component/main";
+import { StyleSheet, View } from "react-native";
+import { TouchableWithoutFeedback, Keyboard } from "react-native";
+import { StatusBar } from "expo-status-bar";
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
@@ -26,21 +24,21 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
-  const routing = useRoute(1);
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        Keyboard.dismiss();
-      }}
-    >
-      <View style={styles.container} onLayout={onLayoutRootView}>
-        <NavigationContainer>{routing}</NavigationContainer>
-        <StatusBar style="auto" />
-      </View>
-    </TouchableWithoutFeedback>
+    <Provider store={store}>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          Keyboard.dismiss();
+        }}
+      >
+        <View style={styles.container} onLayout={onLayoutRootView}>
+          <Main />
+          <StatusBar style="auto" />
+        </View>
+      </TouchableWithoutFeedback>
+    </Provider>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

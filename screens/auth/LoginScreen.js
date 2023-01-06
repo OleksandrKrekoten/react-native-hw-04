@@ -10,18 +10,24 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
+import { useDispatch } from "react-redux";
+import { authSignInUser } from "../../redux/auth/authOperations";
 const initialState = {
   email: "",
   password: "",
 };
-export const LoginScreen = ({navigation}) => {
+
+export const LoginScreen = ({ navigation }) => {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [loginValue, setloginValue] = useState(initialState);
-  const hidenKeyboard = () => {
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
+    dispatch(authSignInUser(loginValue));
     setloginValue(initialState);
-    console.log(loginValue);
   };
   return (
     <ImageBackground
@@ -70,7 +76,7 @@ export const LoginScreen = ({navigation}) => {
             style={styles.button}
             activeOpacity={0.7}
             onPress={() => {
-              hidenKeyboard();
+              handleSubmit();
             }}
           >
             <Text style={{ color: "#fff" }}>Sign In</Text>

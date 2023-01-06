@@ -55,7 +55,7 @@ export const useRoute = (isAuth) => {
               color={focused ? "#fff" : "#808080"}
             />
           ),
-           headerShown: false ,
+          headerShown: false,
         }}
         name="Posts"
         component={PostsScreen}

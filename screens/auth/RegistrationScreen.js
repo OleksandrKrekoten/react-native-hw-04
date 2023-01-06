@@ -10,20 +10,25 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
+import { useDispatch } from "react-redux";
+import { authSignUpUser } from "../../redux/auth/authOperations";
+
 const initialState = {
   username: "",
   email: "",
   password: "",
 };
-export const RegistrationScreen = ({navigation}) => {
+export const RegistrationScreen = ({ navigation }) => {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [authValue, setAuthValue] = useState(initialState);
 
-  const hidenKeyboard = () => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
+    dispatch(authSignUpUser(authValue));
     setAuthValue(initialState);
-    console.log(authValue);
   };
 
   return (
@@ -85,7 +90,7 @@ export const RegistrationScreen = ({navigation}) => {
             style={styles.button}
             activeOpacity={0.7}
             onPress={() => {
-              hidenKeyboard();
+              handleSubmit();
             }}
           >
             <Text style={{ color: "#fff" }}>Sign Up</Text>
